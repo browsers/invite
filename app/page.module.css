@@ -1,0 +1,51 @@
+.main {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 2rem 1rem;
+}
+
+.row {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.avatar {
+  width: 168px;
+  height: 168px;
+  object-fit: cover;
+  border-radius: 6px;
+  display: block;
+}
+
+.name {
+  margin-top: 0.85rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+.handle {
+  margin-top: 0.15rem;
+  font-size: 0.9rem;
+  color: #8a8a8a;
+}
+
+@media (max-width: 480px) {
+  .row {
+    gap: 1.25rem;
+  }
+  .avatar {
+    width: 140px;
+    height: 140px;
+  }
+}
