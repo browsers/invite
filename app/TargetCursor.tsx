@@ -27,8 +27,6 @@ export default function TargetCursor({
     const el = root.current;
     if (!el) return;
 
-    if (hideDefaultCursor) document.documentElement.classList.add("tc-hide");
-
     const spin = el.querySelector<HTMLElement>(".tc-spin")!;
     let target: Element | null = null;
     let mx = 0;
@@ -102,6 +100,8 @@ export default function TargetCursor({
         cx = dx = mx;
         cy = dy = my;
         el.classList.add("visible");
+        // hide the native cursor only once the custom one is actually on screen
+        if (hideDefaultCursor) document.documentElement.classList.add("tc-hide");
       }
       const t = (e.target as Element | null)?.closest?.(targetSelector) ?? null;
       if (t) {
