@@ -53,7 +53,7 @@ export default function TargetCursor({
       el.style.transform = `translate(${cx}px, ${cy}px)`;
 
       if (rotTarget !== null) {
-        rot += (rotTarget - rot) * (1 - Math.exp(-dt / 90));
+        rot += (rotTarget - rot) * (1 - Math.exp(-dt / 60));
       } else {
         rot += (360 / (spinDuration * 1000)) * dt;
       }
@@ -74,7 +74,7 @@ export default function TargetCursor({
       el.classList.add("locked");
       dx = r.left + r.width / 2;
       dy = r.top + r.height / 2;
-      rotTarget = Math.round(rot / 360) * 360;
+      rotTarget = Math.round(rot / 90) * 90; // 4 brackets look identical every 90deg, so it turns 45deg at most
       place(r.width / 2 + padding, r.height / 2 + padding);
     };
 
