@@ -74,8 +74,14 @@ export default function TargetCursor({
       el.classList.add("locked");
       dx = r.left + r.width / 2;
       dy = r.top + r.height / 2;
-      rotTarget = Math.round(rot / 90) * 90; // 4 brackets look identical every 90deg, so it turns 45deg at most
-      place(r.width / 2 + padding, r.height / 2 + padding);
+      // settle on the nearest quarter turn (45deg at most). On an odd quarter
+      // turn the frame is sideways, so swap width/height to end up correct.
+      const k = Math.round(rot / 90);
+      rotTarget = k * 90;
+      const hw = r.width / 2 + padding;
+      const hh = r.height / 2 + padding;
+      if (Math.abs(k) % 2 === 1) place(hh, hw);
+      else place(hw, hh);
     };
 
     const unlock = () => {
