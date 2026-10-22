@@ -51,7 +51,7 @@ export default function Home() {
             <div className={styles.handle}>{p.handle}</div>
             <div className={styles.icons}>
               <a
-                className={`${styles.icon} cursor-target`}
+                className={`${styles.icon} ${styles.tiktok} cursor-target`}
                 data-cursor-padding="0"
                 href={p.tiktok}
                 target="_blank"
@@ -61,7 +61,7 @@ export default function Home() {
                 <TikTok />
               </a>
               <a
-                className={`${styles.icon} cursor-target`}
+                className={`${styles.icon} ${styles.discord} cursor-target`}
                 data-cursor-padding="0"
                 href={DISCORD}
                 target="_blank"
