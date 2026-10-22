@@ -49,3 +49,29 @@
     height: 140px;
   }
 }
+
+.icons {
+  margin-top: 0.7rem;
+  display: flex;
+  gap: 0.9rem;
+  justify-content: center;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  color: #8a8a8a;
+  transition: color 0.2s ease;
+}
+
+.icon:hover {
+  color: #fff;
+}
+
+.icon svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}

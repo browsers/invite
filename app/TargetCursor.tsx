@@ -78,8 +78,9 @@ export default function TargetCursor({
       // turn the frame is sideways, so swap width/height to end up correct.
       const k = Math.round(rot / 90);
       rotTarget = k * 90;
-      const hw = r.width / 2 + padding;
-      const hh = r.height / 2 + padding;
+      const pad = Number(t.getAttribute("data-cursor-padding") ?? padding);
+      const hw = r.width / 2 + pad;
+      const hh = r.height / 2 + pad;
       if (Math.abs(k) % 2 === 1) place(hh, hw);
       else place(hw, hh);
     };
