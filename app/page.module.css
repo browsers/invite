@@ -51,17 +51,18 @@
 }
 
 .icons {
-  margin-top: 0.7rem;
+  margin-top: 0.35rem;
   display: flex;
-  gap: 0.9rem;
+  gap: 6px;
   justify-content: center;
 }
 
+/* big hit area; the crosshair box matches this size */
 .icon {
   display: grid;
   place-items: center;
-  width: 22px;
-  height: 22px;
+  width: 44px;
+  height: 44px;
   color: #8a8a8a;
   transition: color 0.2s ease;
 }
@@ -71,7 +72,7 @@
 }
 
 .icon svg {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   display: block;
 }

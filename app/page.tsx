@@ -50,7 +50,7 @@ export default function Home() {
             <div className={styles.icons}>
               <a
                 className={`${styles.icon} cursor-target`}
-                data-cursor-padding="3"
+                data-cursor-padding="0"
                 href={p.tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -60,7 +60,7 @@ export default function Home() {
               </a>
               <a
                 className={`${styles.icon} cursor-target`}
-                data-cursor-padding="3"
+                data-cursor-padding="0"
                 href={DISCORD}
                 target="_blank"
                 rel="noopener noreferrer"
