@@ -1,8 +1,10 @@
-.main {
-  min-height: 100dvh;
+.page {
+  height: 100dvh;
   display: grid;
   place-items: center;
   padding: 2rem 1rem;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .row {

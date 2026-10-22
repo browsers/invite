@@ -1,6 +1,7 @@
 import styles from "./page.module.css";
 import TargetCursor from "./TargetCursor";
 import Splash from "./Splash";
+import ScrollIndicator from "./ScrollIndicator";
 
 const DISCORD = "https://discord.gg/killed";
 
@@ -39,41 +40,45 @@ function Discord() {
 
 export default function Home() {
   return (
-    <main className={styles.main}>
+    <main>
       <Splash />
       <TargetCursor spinDuration={2} hideDefaultCursor />
-      <div className={styles.row}>
-        {people.map((p) => (
-          <div className={styles.card} key={p.handle}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className={`${styles.avatar} cursor-target`} src={p.img} alt={p.name} />
-            <div className={styles.name}>{p.name}</div>
-            <div className={styles.handle}>{p.handle}</div>
-            <div className={styles.icons}>
-              <a
-                className={`${styles.icon} ${styles.tiktok} cursor-target`}
-                data-cursor-padding="0"
-                href={p.tiktok}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="TikTok"
-              >
-                <TikTok />
-              </a>
-              <a
-                className={`${styles.icon} ${styles.discord} cursor-target`}
-                data-cursor-padding="0"
-                href={DISCORD}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Discord"
-              >
-                <Discord />
-              </a>
+      <ScrollIndicator count={2} />
+      <section className={styles.page} id="page-1">
+        <div className={styles.row}>
+          {people.map((p) => (
+            <div className={styles.card} key={p.handle}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className={`${styles.avatar} cursor-target`} src={p.img} alt={p.name} />
+              <div className={styles.name}>{p.name}</div>
+              <div className={styles.handle}>{p.handle}</div>
+              <div className={styles.icons}>
+                <a
+                  className={`${styles.icon} ${styles.tiktok} cursor-target`}
+                  data-cursor-padding="0"
+                  href={p.tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="TikTok"
+                >
+                  <TikTok />
+                </a>
+                <a
+                  className={`${styles.icon} ${styles.discord} cursor-target`}
+                  data-cursor-padding="0"
+                  href={DISCORD}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Discord"
+                >
+                  <Discord />
+                </a>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </section>
+      <section className={styles.page} aria-hidden id="page-2" />
     </main>
   );
 }

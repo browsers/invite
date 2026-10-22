@@ -1,0 +1,88 @@
+.rail {
+  position: fixed;
+  right: 22px;
+  top: 50%;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 9px 0;
+  border-radius: 999px;
+  background: #000;
+  transform: translateY(-50%);
+  animation: railIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+}
+
+@keyframes railIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%);
+  }
+}
+
+/* fixed-size hit area so the dots never shift as the active mark grows */
+.item {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.mark {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 7px rgba(255, 255, 255, 0.16);
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.item:hover .mark {
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.active .mark {
+  width: 4px;
+  height: 30px;
+  background: #fff;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.55), 0 0 2px #fff;
+}
+
+.active:hover .mark {
+  background: #fff;
+}
+
+@media (max-width: 480px) {
+  .rail {
+    right: 10px;
+    padding: 7px 0;
+  }
+  .item {
+    width: 22px;
+    height: 38px;
+  }
+  .active .mark {
+    height: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail {
+    animation: none;
+  }
+  .mark {
+    transition: none;
+  }
+}
