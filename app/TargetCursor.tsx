@@ -29,10 +29,37 @@ export default function TargetCursor({
 
     if (hideDefaultCursor) document.documentElement.classList.add("tc-hide");
 
+    const spin = el.querySelector<HTMLElement>(".tc-spin")!;
     let target: Element | null = null;
     let mx = 0;
     let my = 0;
+    let cx = 0; // current (smoothed) position
+    let cy = 0;
+    let dx = 0; // desired position
+    let dy = 0;
+    let rot = 0;
+    let rotTarget: number | null = null; // set while locked
     let seen = false;
+    let raf = 0;
+    let last = performance.now();
+
+    const tick = (now: number) => {
+      const dt = Math.min(now - last, 50);
+      last = now;
+      // frame-rate independent exponential smoothing
+      const k = 1 - Math.exp(-dt / (target ? 70 : 40));
+      cx += (dx - cx) * k;
+      cy += (dy - cy) * k;
+      el.style.transform = `translate(${cx}px, ${cy}px)`;
+
+      if (rotTarget !== null) {
+        rot += (rotTarget - rot) * (1 - Math.exp(-dt / 90));
+      } else {
+        rot += (360 / (spinDuration * 1000)) * dt;
+      }
+      spin.style.transform = `rotate(${rot}deg)`;
+      raf = requestAnimationFrame(tick);
+    };
 
     const place = (hw: number, hh: number) => {
       const [tl, tr, br, bl] = corners.current;
@@ -45,14 +72,18 @@ export default function TargetCursor({
     const lock = (t: Element) => {
       const r = t.getBoundingClientRect();
       el.classList.add("locked");
-      el.style.transform = `translate(${r.left + r.width / 2}px, ${r.top + r.height / 2}px)`;
+      dx = r.left + r.width / 2;
+      dy = r.top + r.height / 2;
+      rotTarget = Math.round(rot / 360) * 360;
       place(r.width / 2 + padding, r.height / 2 + padding);
     };
 
     const unlock = () => {
       target = null;
       el.classList.remove("locked");
-      el.style.transform = `translate(${mx}px, ${my}px)`;
+      rotTarget = null;
+      dx = mx;
+      dy = my;
       place(IDLE, IDLE);
     };
 
@@ -61,6 +92,8 @@ export default function TargetCursor({
       my = e.clientY;
       if (!seen) {
         seen = true;
+        cx = dx = mx;
+        cy = dy = my;
         el.classList.add("visible");
       }
       const t = (e.target as Element | null)?.closest?.(targetSelector) ?? null;
@@ -73,7 +106,8 @@ export default function TargetCursor({
       } else if (target) {
         unlock();
       } else {
-        el.style.transform = `translate(${mx}px, ${my}px)`;
+        dx = mx;
+        dy = my;
       }
     };
 
@@ -82,6 +116,7 @@ export default function TargetCursor({
     const onEnter = () => seen && el.classList.add("visible");
 
     place(IDLE, IDLE);
+    raf = requestAnimationFrame(tick);
     window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("scroll", refresh, { passive: true });
     window.addEventListener("resize", refresh);
@@ -89,6 +124,7 @@ export default function TargetCursor({
     document.documentElement.addEventListener("mouseenter", onEnter);
 
     return () => {
+      cancelAnimationFrame(raf);
       document.documentElement.classList.remove("tc-hide");
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("scroll", refresh);
@@ -96,11 +132,11 @@ export default function TargetCursor({
       document.documentElement.removeEventListener("mouseleave", onLeave);
       document.documentElement.removeEventListener("mouseenter", onEnter);
     };
-  }, [targetSelector, hideDefaultCursor, padding]);
+  }, [targetSelector, hideDefaultCursor, padding, spinDuration]);
 
   return (
     <div ref={root} className="tc-root" aria-hidden>
-      <div className="tc-spin" style={{ animationDuration: `${spinDuration}s` }}>
+      <div className="tc-spin">
         <div className="tc-dot" />
         {[0, 1, 2, 3].map((i) => (
           <div

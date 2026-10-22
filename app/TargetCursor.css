@@ -19,28 +19,12 @@
   opacity: 1;
 }
 
-/* only animate position when snapping onto a target */
-.tc-root.locked {
-  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
 .tc-spin {
   position: absolute;
   top: 0;
   left: 0;
   width: 0;
   height: 0;
-  animation: tc-spin linear infinite;
-}
-
-.tc-root.locked .tc-spin {
-  animation: none;
-}
-
-@keyframes tc-spin {
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 .tc-dot {
@@ -50,7 +34,7 @@
   left: -2px;
   top: -2px;
   background: var(--tc-color);
-  transition: opacity 0.1s;
+  transition: opacity 0.25s ease;
 }
 
 .tc-root.locked .tc-dot {
@@ -66,7 +50,7 @@
   height: 10px;
   border: 0 solid var(--tc-color);
   border-radius: 0;
-  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .tc-c0 { border-top-width: 2px; border-left-width: 2px; }
