@@ -1,5 +1,6 @@
 import styles from "./page.module.css";
 import TargetCursor from "./TargetCursor";
+import Splash from "./Splash";
 
 const DISCORD = "https://discord.gg/killed";
 
@@ -39,12 +40,13 @@ function Discord() {
 export default function Home() {
   return (
     <main className={styles.main}>
+      <Splash />
       <TargetCursor spinDuration={2} hideDefaultCursor />
       <div className={styles.row}>
         {people.map((p) => (
-          <div className={`${styles.card} cursor-target`} key={p.handle}>
+          <div className={styles.card} key={p.handle}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className={styles.avatar} src={p.img} alt={p.name} />
+            <img className={`${styles.avatar} cursor-target`} src={p.img} alt={p.name} />
             <div className={styles.name}>{p.name}</div>
             <div className={styles.handle}>{p.handle}</div>
             <div className={styles.icons}>
