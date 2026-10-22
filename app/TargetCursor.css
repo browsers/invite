@@ -1,0 +1,75 @@
+.tc-hide,
+.tc-hide * {
+  cursor: none !important;
+}
+
+.tc-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  --tc-color: #fff;
+}
+
+.tc-root.visible {
+  opacity: 1;
+}
+
+/* only animate position when snapping onto a target */
+.tc-root.locked {
+  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tc-spin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  animation: tc-spin linear infinite;
+}
+
+.tc-root.locked .tc-spin {
+  animation: none;
+}
+
+@keyframes tc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tc-dot {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  left: -2px;
+  top: -2px;
+  background: var(--tc-color);
+  transition: opacity 0.1s;
+}
+
+.tc-root.locked .tc-dot {
+  opacity: 0;
+}
+
+/* sharp square brackets: no border-radius */
+.tc-corner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border: 0 solid var(--tc-color);
+  border-radius: 0;
+  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tc-c0 { border-top-width: 2px; border-left-width: 2px; }
+.tc-c1 { border-top-width: 2px; border-right-width: 2px; }
+.tc-c2 { border-bottom-width: 2px; border-right-width: 2px; }
+.tc-c3 { border-bottom-width: 2px; border-left-width: 2px; }
