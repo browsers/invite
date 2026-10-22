@@ -42,7 +42,7 @@ export default function Home() {
   return (
     <main>
       <Splash />
-      <TargetCursor spinDuration={2} hideDefaultCursor />
+      <TargetCursor spinDuration={2} />
       <ScrollIndicator count={2} />
       <section className={styles.page} id="page-1">
         <div className={styles.row}>

@@ -16,7 +16,7 @@ const IDLE = 13; // bracket distance from center when idle
 export default function TargetCursor({
   targetSelector = ".cursor-target",
   spinDuration = 2,
-  hideDefaultCursor = true,
+  hideDefaultCursor = false,
   padding = 8,
 }: Props) {
   const root = useRef<HTMLDivElement>(null);
@@ -69,7 +69,7 @@ export default function TargetCursor({
 
     const lock = (t: Element) => {
       const r = t.getBoundingClientRect();
-      el.classList.add("locked");
+      el.classList.add("locked", "visible");
       dx = r.left + r.width / 2;
       dy = r.top + r.height / 2;
       // settle on the nearest quarter turn (45deg at most). On an odd quarter
@@ -85,7 +85,7 @@ export default function TargetCursor({
 
     const unlock = () => {
       target = null;
-      el.classList.remove("locked");
+      el.classList.remove("locked", "visible");
       rotTarget = null;
       dx = mx;
       dy = my;
@@ -99,9 +99,6 @@ export default function TargetCursor({
         seen = true;
         cx = dx = mx;
         cy = dy = my;
-        el.classList.add("visible");
-        // hide the native cursor only once the custom one is actually on screen
-        if (hideDefaultCursor) document.documentElement.classList.add("tc-hide");
       }
       const t = (e.target as Element | null)?.closest?.(targetSelector) ?? null;
       if (t) {
@@ -120,7 +117,9 @@ export default function TargetCursor({
 
     const refresh = () => target && lock(target);
     const onLeave = () => el.classList.remove("visible");
-    const onEnter = () => seen && el.classList.add("visible");
+    const onEnter = () => {
+      if (seen && target) lock(target);
+    };
 
     place(IDLE, IDLE);
     raf = requestAnimationFrame(tick);
