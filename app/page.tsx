@@ -47,6 +47,13 @@ const secondPage: Person[] = [
     tiktok: [{ label: "@ur9", href: "https://tiktok.com/@ur9" }],
     discord: "https://discord.com/users/1163458612295913523",
   },
+  {
+    name: "hurt",
+    handle: "@khr6n",
+    img: "/hurt.png",
+    tiktok: [{ label: "@sanctum", href: "https://tiktok.com/@sanctum" }],
+    discord: "https://discord.com/users/1011383110014861495",
+  },
 ];
 
 function TikTok() {
@@ -159,9 +166,11 @@ export default function Home() {
       </section>
       <section className={`${styles.page} ${styles.pageTwo}`} id="page-2">
         <div className={styles.pageTwoContent}>
-          {secondPage.map((p) => (
-            <ProfileCard key={p.handle} person={p} />
-          ))}
+          <div className={styles.row}>
+            {secondPage.map((p) => (
+              <ProfileCard key={p.handle} person={p} />
+            ))}
+          </div>
           <div className={styles.invite}>
             <p className={styles.inviteText}>
               message @miniscules on discord to be on this page
