@@ -59,12 +59,74 @@
   justify-content: center;
 }
 
+/* the X icon doubles as a hover trigger for its account list */
+.hasMenu {
+  position: relative;
+  display: flex;
+}
+
+.menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  z-index: 20;
+  padding-top: 8px; /* invisible bridge so the menu survives the gap */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, -6px);
+  transition: opacity 0.22s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.22s;
+}
+
+.hasMenu:hover .menu,
+.hasMenu:focus-within .menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+.menuPanel {
+  display: flex;
+  flex-direction: column;
+  min-width: 92px;
+  padding: 4px;
+  border-radius: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 10, 10, 0.92);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.65);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.menuItem {
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: #8a8a8a;
+  font-size: 0.82rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.18s ease, background-color 0.18s ease;
+}
+
+.menuItem:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
 /* big hit area; the crosshair box matches this size */
 .icon {
   display: grid;
   place-items: center;
   width: 36px;
   height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
   color: #8a8a8a;
   transition: color 0.2s ease;
 }
@@ -82,6 +144,11 @@
 .tiktok svg {
   width: 18px;
   height: 18px;
+}
+
+.x svg {
+  width: 17px;
+  height: 17px;
 }
 
 .discord svg {
