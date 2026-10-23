@@ -80,7 +80,6 @@ export default function Home() {
         layers={8}
         curve="linear"
         exponential
-        tint="rgba(18, 15, 23, 0.6)"
         autoHide
       />
       <GradualBlur
@@ -91,7 +90,6 @@ export default function Home() {
         layers={8}
         curve="linear"
         exponential
-        tint="rgba(18, 15, 23, 0.6)"
         autoHide
       />
       <section className={styles.page} id="page-1">
