@@ -11,7 +11,7 @@ type Props = {
   ariaLabel: string;
 };
 
-export default function XMenu({ options, trigger, ariaLabel }: Props) {
+export default function SocialMenu({ options, trigger, ariaLabel }: Props) {
   return (
     <GlideSelect
       options={options.map((o) => ({ value: o.href, label: o.label }))}

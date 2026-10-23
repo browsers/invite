@@ -60,7 +60,7 @@
 }
 
 /* 889's X icon is a GlideSelect: hover it to open the account menu */
-.xMenu :global(.glide-select__trigger) {
+.socialMenu :global(.glide-select__trigger) {
   width: 36px;
   height: 44px;
   padding: 0;
@@ -71,23 +71,33 @@
   transition: color 0.2s ease;
 }
 
-.xMenu :global(.glide-select__trigger svg) {
+.socialMenu :global(.glide-select__trigger svg) {
+  display: block;
+}
+
+.glyphX svg {
   display: block;
   width: 17px;
   height: 17px;
 }
 
-.xMenu :global(.glide-select__trigger:hover),
-.xMenu :global(.glide-select__trigger[aria-expanded="true"]) {
+.glyphTiktok svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.socialMenu :global(.glide-select__trigger:hover),
+.socialMenu :global(.glide-select__trigger[aria-expanded="true"]) {
   color: #fff;
 }
 
-.xMenu :global(.glide-select__trigger:active) {
+.socialMenu :global(.glide-select__trigger:active) {
   transform: none;
 }
 
 /* centre the panel under the icon and add a bridge over the gap */
-.xMenu :global(.glide-select__menu) {
+.socialMenu :global(.glide-select__menu) {
   left: 50% !important;
   right: auto !important;
   transform-origin: top center;
@@ -95,11 +105,11 @@
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.65);
 }
 
-.xMenu :global(.glide-select__menu[data-state="open"]) {
+.socialMenu :global(.glide-select__menu[data-state="open"]) {
   transform: translateX(-50%) !important;
 }
 
-.xMenu :global(.glide-select__menu::before) {
+.socialMenu :global(.glide-select__menu::before) {
   content: "";
   position: absolute;
   left: 0;
@@ -108,21 +118,21 @@
   height: 8px;
 }
 
-.xMenu :global(.glide-select__option) {
+.socialMenu :global(.glide-select__option) {
   padding: 0 8px;
   font-size: 0.85rem;
 }
 
-.xMenu :global(.glide-select__name) {
+.socialMenu :global(.glide-select__name) {
   text-align: center;
 }
 
 /* no selected row, so don't reserve room for the tick */
-.xMenu :global(.glide-select__check) {
+.socialMenu :global(.glide-select__check) {
   display: none;
 }
 
-.xMenu :global(.glide-select__option:hover) {
+.socialMenu :global(.glide-select__option:hover) {
   color: #fff;
 }
 
@@ -151,18 +161,9 @@
   shape-rendering: geometricPrecision;
 }
 
-/* TikTok is tall and Discord is wide, so size them separately to look equal */
-.tiktok svg {
-  width: 18px;
-  height: 18px;
-}
-
-.x svg {
-  width: 17px;
-  height: 17px;
-}
-
+/* Discord is wide, so it needs a slightly bigger box to match the others */
 .discord svg {
   width: 22px;
   height: 22px;
 }
+

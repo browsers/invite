@@ -2,7 +2,7 @@ import styles from "./page.module.css";
 import TargetCursor from "./TargetCursor";
 import Splash from "./Splash";
 import ScrollIndicator from "./ScrollIndicator";
-import XMenu from "./XMenu";
+import SocialMenu from "./SocialMenu";
 import GradualBlur from "./GradualBlur";
 
 type Social = { label: string; href: string };
@@ -11,8 +11,8 @@ type Person = {
   name: string;
   handle: string;
   img: string;
-  tiktok: string;
-  x: string | Social[];
+  tiktok: Social[];
+  x: Social[];
   discord: string;
 };
 
@@ -21,20 +21,20 @@ const people: Person[] = [
     name: "hamfy",
     handle: "@miniscules",
     img: "/hamfy.webp",
-    tiktok: "https://tiktok.com/@factor",
-    x: "https://x.com/rebasing",
+    x: [{ label: "@rebasing", href: "https://x.com/rebasing" }],
+    tiktok: [{ label: "@factor", href: "https://tiktok.com/@factor" }],
     discord: "https://discord.com/users/355869591278452746",
   },
   {
     name: "889",
     handle: "@889",
     img: "/889.png",
-    tiktok: "https://tiktok.com/@itch",
     x: [
       { label: "@caplet", href: "https://x.com/caplet" },
       { label: "@xpd", href: "https://x.com/xpd" },
       { label: "@uey", href: "https://x.com/uey" },
     ],
+    tiktok: [{ label: "@itch", href: "https://tiktok.com/@itch" }],
     discord: "https://discord.com/users/1163467824539381770",
   },
 ];
@@ -101,36 +101,28 @@ export default function Home() {
               <div className={styles.name}>{p.name}</div>
               <div className={styles.handle}>{p.handle}</div>
               <div className={styles.icons}>
-                {Array.isArray(p.x) ? (
-                  <div className={`${styles.xMenu} cursor-target`} data-cursor-padding="0">
-                    <XMenu
-                      options={p.x}
-                      trigger={<XLogo />}
-                      ariaLabel={`${p.name} on X`}
-                    />
-                  </div>
-                ) : (
-                  <a
-                    className={`${styles.icon} ${styles.x} cursor-target`}
-                    data-cursor-padding="0"
-                    href={p.x}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="X"
-                  >
-                    <XLogo />
-                  </a>
-                )}
-                <a
-                  className={`${styles.icon} ${styles.tiktok} cursor-target`}
-                  data-cursor-padding="0"
-                  href={p.tiktok}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="TikTok"
-                >
-                  <TikTok />
-                </a>
+                <div className={`${styles.socialMenu} cursor-target`} data-cursor-padding="0">
+                  <SocialMenu
+                    options={p.x}
+                    trigger={
+                      <span className={styles.glyphX}>
+                        <XLogo />
+                      </span>
+                    }
+                    ariaLabel={`${p.name} on X`}
+                  />
+                </div>
+                <div className={`${styles.socialMenu} cursor-target`} data-cursor-padding="0">
+                  <SocialMenu
+                    options={p.tiktok}
+                    trigger={
+                      <span className={styles.glyphTiktok}>
+                        <TikTok />
+                      </span>
+                    }
+                    ariaLabel={`${p.name} on TikTok`}
+                  />
+                </div>
                 <a
                   className={`${styles.icon} ${styles.discord} cursor-target`}
                   data-cursor-padding="0"
