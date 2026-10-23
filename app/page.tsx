@@ -151,8 +151,11 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span className={styles.discordGlyph}>
+            <span className={styles.discordGlyph} aria-hidden="true">
               <Discord />
+              <span className={styles.discordFill}>
+                <Discord />
+              </span>
             </span>
             <span>Discord</span>
           </a>
