@@ -163,6 +163,10 @@ export default function Home() {
             <ProfileCard key={p.handle} person={p} />
           ))}
         </div>
+        <div className={styles.scrollHint} aria-hidden="true">
+          <span>scroll</span>
+          <span className={styles.chevron} />
+        </div>
       </section>
       <section className={`${styles.page} ${styles.pageTwo}`} id="page-2">
         <div className={styles.pageTwoContent}>
@@ -173,7 +177,7 @@ export default function Home() {
           </div>
           <div className={styles.invite}>
             <p className={styles.inviteText}>
-              message @miniscules on discord to be on this page
+              message @minuscules on discord to be on this page
             </p>
             <a
               className={`${styles.discordButton} cursor-target`}
