@@ -73,6 +73,17 @@ export default function Home() {
       <TargetCursor spinDuration={2} />
       <ScrollIndicator count={2} />
       <GradualBlur
+        position="top"
+        target="page"
+        height="6rem"
+        strength={2}
+        layers={8}
+        curve="linear"
+        exponential
+        tint="rgba(18, 15, 23, 0.6)"
+        autoHide
+      />
+      <GradualBlur
         position="bottom"
         target="page"
         height="6rem"
