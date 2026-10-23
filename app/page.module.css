@@ -26,13 +26,13 @@
 .discordButton {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 7px 14px;
-  border-radius: 10px;
+  gap: 7px;
+  padding: 5px 12px;
+  border-radius: 9px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: #0d0d0d;
   color: #b4b4b4;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   line-height: 1;
   text-decoration: none;
   transition: color 0.2s ease, background-color 0.2s ease,
@@ -48,15 +48,15 @@
 .discordGlyph {
   position: relative;
   display: block;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   color: #fff;
 }
 
 .discordGlyph > svg {
   display: block;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
 }
 
 /* blue fills up the white logo on hover */
@@ -66,14 +66,17 @@
   color: #5865f2;
   clip-path: inset(100% 0 0 0);
   -webkit-clip-path: inset(100% 0 0 0);
+  /* a hair larger so its antialiased edge hides the white one underneath */
+  transform: scale(1.06);
+  transform-origin: center;
   transition: clip-path 0.4s cubic-bezier(0.22, 1, 0.36, 1),
     -webkit-clip-path 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .discordFill svg {
   display: block;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
 }
 
 .discordButton:hover .discordFill {
