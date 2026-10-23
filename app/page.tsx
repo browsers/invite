@@ -139,7 +139,25 @@ export default function Home() {
           ))}
         </div>
       </section>
-      <section className={styles.page} aria-hidden id="page-2" />
+      <section className={`${styles.page} ${styles.pageTwo}`} id="page-2">
+        <div className={styles.invite}>
+          <p className={styles.inviteText}>
+            message @miniscules on discord to be on this page
+          </p>
+          <a
+            className={`${styles.discordButton} cursor-target`}
+            data-cursor-padding="4"
+            href="https://discord.com/users/355869591278452746"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className={styles.discordGlyph}>
+              <Discord />
+            </span>
+            <span>Discord</span>
+          </a>
+        </div>
+      </section>
     </main>
   );
 }

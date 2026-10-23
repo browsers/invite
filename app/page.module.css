@@ -7,6 +7,56 @@
   scroll-snap-stop: always;
 }
 
+.invite {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.35rem;
+  text-align: center;
+}
+
+.inviteText {
+  margin: 0;
+  max-width: 22rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #d4d4d4;
+}
+
+.discordButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: #0d0d0d;
+  color: #b4b4b4;
+  font-size: 0.9rem;
+  line-height: 1;
+  text-decoration: none;
+  transition: color 0.2s ease, background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.discordButton:hover {
+  color: #fff;
+  background: #151515;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.discordGlyph {
+  display: grid;
+  place-items: center;
+  color: #5865f2;
+}
+
+.discordGlyph svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
 .row {
   display: flex;
   gap: 2rem;
