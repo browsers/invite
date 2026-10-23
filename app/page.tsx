@@ -3,6 +3,7 @@ import TargetCursor from "./TargetCursor";
 import Splash from "./Splash";
 import ScrollIndicator from "./ScrollIndicator";
 import XMenu from "./XMenu";
+import GradualBlur from "./GradualBlur";
 
 type Social = { label: string; href: string };
 
@@ -71,6 +72,17 @@ export default function Home() {
       <Splash />
       <TargetCursor spinDuration={2} />
       <ScrollIndicator count={2} />
+      <GradualBlur
+        position="bottom"
+        target="page"
+        height="6rem"
+        strength={2}
+        layers={8}
+        curve="linear"
+        exponential
+        tint="rgba(18, 15, 23, 0.6)"
+        autoHide
+      />
       <section className={styles.page} id="page-1">
         <div className={styles.row}>
           {people.map((p) => (
