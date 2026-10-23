@@ -29,7 +29,7 @@ export default function XMenu({ options, trigger, ariaLabel }: Props) {
       glideDuration={220}
       rememberPosition
       accentColor="#f5f5f5"
-      surfaceColor="#0b0b0b"
+      surfaceColor="#000000"
       highlightColor="#1e1e1e"
       textColor="#a3a3a3"
       optionClassName="cursor-target"
