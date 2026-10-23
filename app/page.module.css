@@ -1,4 +1,4 @@
-.page {
+﻿.page {
   height: 100dvh;
   display: grid;
   place-items: center;
@@ -59,60 +59,62 @@
   justify-content: center;
 }
 
-/* the X icon doubles as a hover trigger for its account list */
-.hasMenu {
-  position: relative;
-  display: flex;
-}
-
-.menu {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  z-index: 20;
-  padding-top: 8px; /* invisible bridge so the menu survives the gap */
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform: translate(-50%, -6px);
-  transition: opacity 0.22s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-    visibility 0.22s;
-}
-
-.hasMenu:hover .menu,
-.hasMenu:focus-within .menu {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translate(-50%, 0);
-}
-
-.menuPanel {
-  display: flex;
-  flex-direction: column;
-  min-width: 92px;
-  padding: 4px;
-  border-radius: 9px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(10, 10, 10, 0.92);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.65);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-}
-
-.menuItem {
-  padding: 6px 10px;
-  border-radius: 6px;
+/* 889's X icon is a GlideSelect: hover it to open the account menu */
+.xMenu :global(.glide-select__trigger) {
+  width: 36px;
+  height: 44px;
+  padding: 0;
+  justify-content: center;
+  background: none !important;
+  border-radius: 0;
   color: #8a8a8a;
-  font-size: 0.82rem;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: color 0.18s ease, background-color 0.18s ease;
+  transition: color 0.2s ease;
 }
 
-.menuItem:hover {
+.xMenu :global(.glide-select__trigger svg) {
+  display: block;
+  width: 17px;
+  height: 17px;
+}
+
+.xMenu :global(.glide-select__trigger:hover),
+.xMenu :global(.glide-select__trigger[aria-expanded="true"]) {
   color: #fff;
-  background: rgba(255, 255, 255, 0.06);
+}
+
+.xMenu :global(.glide-select__trigger:active) {
+  transform: none;
+}
+
+/* centre the panel under the icon and add a bridge over the gap */
+.xMenu :global(.glide-select__menu) {
+  left: 50% !important;
+  right: auto !important;
+  transform-origin: top center;
+  transform: translateX(-50%) scale(0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.65);
+}
+
+.xMenu :global(.glide-select__menu[data-state="open"]) {
+  transform: translateX(-50%) !important;
+}
+
+.xMenu :global(.glide-select__menu::before) {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -8px;
+  height: 8px;
+}
+
+.xMenu :global(.glide-select__option) {
+  font-size: 0.88rem;
+}
+
+.xMenu :global(.glide-select__option:hover) {
+  color: #fff;
 }
 
 /* big hit area; the crosshair box matches this size */

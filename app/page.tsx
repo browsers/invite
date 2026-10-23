@@ -2,6 +2,7 @@ import styles from "./page.module.css";
 import TargetCursor from "./TargetCursor";
 import Splash from "./Splash";
 import ScrollIndicator from "./ScrollIndicator";
+import XMenu from "./XMenu";
 
 type Social = { label: string; href: string };
 
@@ -80,33 +81,12 @@ export default function Home() {
               <div className={styles.handle}>{p.handle}</div>
               <div className={styles.icons}>
                 {Array.isArray(p.x) ? (
-                  <div className={styles.hasMenu}>
-                    <button
-                      type="button"
-                      className={`${styles.icon} ${styles.x} cursor-target`}
-                      data-cursor-padding="0"
-                      aria-label="X"
-                      aria-haspopup="menu"
-                    >
-                      <XLogo />
-                    </button>
-                    <div className={styles.menu}>
-                      <div className={styles.menuPanel} role="menu" aria-label={`${p.name} on X`}>
-                        {p.x.map((s) => (
-                          <a
-                            key={s.href}
-                            role="menuitem"
-                            className={`${styles.menuItem} cursor-target`}
-                            data-cursor-padding="0"
-                            href={s.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {s.label}
-                          </a>
-                        ))}
-                      </div>
-                    </div>
+                  <div className={`${styles.xMenu} cursor-target`} data-cursor-padding="0">
+                    <XMenu
+                      options={p.x}
+                      trigger={<XLogo />}
+                      ariaLabel={`${p.name} on X`}
+                    />
                   </div>
                 ) : (
                   <a
