@@ -12,7 +12,7 @@ type Person = {
   handle: string;
   img: string;
   tiktok: Social[];
-  x: Social[];
+  x?: Social[];
   discord: string;
 };
 
@@ -36,6 +36,16 @@ const people: Person[] = [
     ],
     tiktok: [{ label: "@itch", href: "https://tiktok.com/@itch" }],
     discord: "https://discord.com/users/1163467824539381770",
+  },
+];
+
+const secondPage: Person[] = [
+  {
+    name: "hids",
+    handle: "@4x2",
+    img: "/hids.png",
+    tiktok: [{ label: "@ur9", href: "https://tiktok.com/@ur9" }],
+    discord: "https://discord.com/users/1163458612295913523",
   },
 ];
 
@@ -63,6 +73,54 @@ function Discord() {
       <title>Discord</title>
       <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z" />
     </svg>
+  );
+}
+
+function ProfileCard({ person: p }: { person: Person }) {
+  return (
+    <div className={styles.card}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className={`${styles.avatar} cursor-target`} src={p.img} alt={p.name} />
+      <div className={styles.name}>{p.name}</div>
+      <div className={styles.handle}>{p.handle}</div>
+      <div className={styles.icons}>
+        {p.x ? (
+          <div className={`${styles.socialMenu} cursor-target`} data-cursor-padding="0">
+            <SocialMenu
+              options={p.x}
+              trigger={
+                <span className={styles.glyphX}>
+                  <XLogo />
+                </span>
+              }
+              ariaLabel={`${p.name} on X`}
+            />
+          </div>
+        ) : null}
+        <div className={`${styles.socialMenu} cursor-target`} data-cursor-padding="0">
+          <SocialMenu
+            options={p.tiktok}
+            trigger={
+              <span className={styles.glyphTiktok}>
+                <TikTok />
+              </span>
+            }
+            ariaLabel={`${p.name} on TikTok`}
+          />
+        </div>
+        <div className={`${styles.socialMenu} cursor-target`} data-cursor-padding="0">
+          <SocialMenu
+            options={[{ label: p.handle, href: p.discord }]}
+            trigger={
+              <span className={styles.glyphDiscord}>
+                <Discord />
+              </span>
+            }
+            ariaLabel={`${p.name} on Discord`}
+          />
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -95,65 +153,30 @@ export default function Home() {
       <section className={styles.page} id="page-1">
         <div className={styles.row}>
           {people.map((p) => (
-            <div className={styles.card} key={p.handle}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className={`${styles.avatar} cursor-target`} src={p.img} alt={p.name} />
-              <div className={styles.name}>{p.name}</div>
-              <div className={styles.handle}>{p.handle}</div>
-              <div className={styles.icons}>
-                <div className={`${styles.socialMenu} cursor-target`} data-cursor-padding="0">
-                  <SocialMenu
-                    options={p.x}
-                    trigger={
-                      <span className={styles.glyphX}>
-                        <XLogo />
-                      </span>
-                    }
-                    ariaLabel={`${p.name} on X`}
-                  />
-                </div>
-                <div className={`${styles.socialMenu} cursor-target`} data-cursor-padding="0">
-                  <SocialMenu
-                    options={p.tiktok}
-                    trigger={
-                      <span className={styles.glyphTiktok}>
-                        <TikTok />
-                      </span>
-                    }
-                    ariaLabel={`${p.name} on TikTok`}
-                  />
-                </div>
-                <div className={`${styles.socialMenu} cursor-target`} data-cursor-padding="0">
-                  <SocialMenu
-                    options={[{ label: p.handle, href: p.discord }]}
-                    trigger={
-                      <span className={styles.glyphDiscord}>
-                        <Discord />
-                      </span>
-                    }
-                    ariaLabel={`${p.name} on Discord`}
-                  />
-                </div>
-              </div>
-            </div>
+            <ProfileCard key={p.handle} person={p} />
           ))}
         </div>
       </section>
       <section className={`${styles.page} ${styles.pageTwo}`} id="page-2">
-        <div className={styles.invite}>
-          <p className={styles.inviteText}>
-            message @miniscules on discord to be on this page
-          </p>
-          <a
-            className={`${styles.discordButton} cursor-target`}
-            data-cursor-padding="4"
-            href="https://discord.com/users/355869591278452746"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span className={styles.discordGlyph} aria-hidden="true" />
-            <span>Discord</span>
-          </a>
+        <div className={styles.pageTwoContent}>
+          {secondPage.map((p) => (
+            <ProfileCard key={p.handle} person={p} />
+          ))}
+          <div className={styles.invite}>
+            <p className={styles.inviteText}>
+              message @miniscules on discord to be on this page
+            </p>
+            <a
+              className={`${styles.discordButton} cursor-target`}
+              data-cursor-padding="4"
+              href="https://discord.com/users/355869591278452746"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className={styles.discordGlyph} aria-hidden="true" />
+              <span>Discord</span>
+            </a>
+          </div>
         </div>
       </section>
     </main>
