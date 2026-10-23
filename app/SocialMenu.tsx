@@ -34,6 +34,7 @@ export default function SocialMenu({ options, trigger, ariaLabel }: Props) {
       textColor="#a3a3a3"
       optionClassName="cursor-target"
       optionCursorPadding={2}
+      group="socials"
     />
   );
 }

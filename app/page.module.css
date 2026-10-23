@@ -136,33 +136,8 @@
   color: #fff;
 }
 
-/* big hit area; the crosshair box matches this size */
-.icon {
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 44px;
-  padding: 0;
-  border: 0;
-  background: none;
-  -webkit-appearance: none;
-  appearance: none;
-  cursor: pointer;
-  color: #8a8a8a;
-  transition: color 0.2s ease;
-}
-
-.icon:hover {
-  color: #fff;
-}
-
-.icon svg {
+.glyphDiscord svg {
   display: block;
-  shape-rendering: geometricPrecision;
-}
-
-/* Discord is wide, so it needs a slightly bigger box to match the others */
-.discord svg {
   width: 22px;
   height: 22px;
 }

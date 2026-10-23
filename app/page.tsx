@@ -123,16 +123,17 @@ export default function Home() {
                     ariaLabel={`${p.name} on TikTok`}
                   />
                 </div>
-                <a
-                  className={`${styles.icon} ${styles.discord} cursor-target`}
-                  data-cursor-padding="0"
-                  href={p.discord}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Discord"
-                >
-                  <Discord />
-                </a>
+                <div className={`${styles.socialMenu} cursor-target`} data-cursor-padding="0">
+                  <SocialMenu
+                    options={[{ label: p.handle, href: p.discord }]}
+                    trigger={
+                      <span className={styles.glyphDiscord}>
+                        <Discord />
+                      </span>
+                    }
+                    ariaLabel={`${p.name} on Discord`}
+                  />
+                </div>
               </div>
             </div>
           ))}

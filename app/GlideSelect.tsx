@@ -42,6 +42,8 @@ export interface GlideSelectProps {
   optionClassName?: string;
   /** data-cursor-padding value for each option row. */
   optionCursorPadding?: number;
+  /** Only one menu per group can be open at a time. */
+  group?: string;
 }
 
 type Phase = 'closed' | 'open' | 'closing';
@@ -93,7 +95,8 @@ const GlideSelect: React.FC<GlideSelectProps> = ({
   triggerContent,
   hoverOpen = false,
   optionClassName = '',
-  optionCursorPadding
+  optionCursorPadding,
+  group
 }) => {
   const items = options.map(norm);
   const [inner, setInner] = useState(defaultValue ?? '');
@@ -164,6 +167,7 @@ const GlideSelect: React.FC<GlideSelectProps> = ({
     instant.current = true;
     setActive(selected >= 0 ? selected : viaKey ? 0 : null);
     setPhase('open');
+    if (group) window.dispatchEvent(new CustomEvent(`glide-select:${group}`, { detail: id }));
   };
   const close = (mode: 'instant' | 'pop') => {
     setActive(null);
@@ -186,8 +190,21 @@ const GlideSelect: React.FC<GlideSelectProps> = ({
   const onHoverLeave = () => {
     if (!hoverOpen || disabled) return;
     clearTimeout(hoverTimer.current);
-    hoverTimer.current = setTimeout(() => close('pop'), 120);
+    hoverTimer.current = setTimeout(() => close('pop'), 60);
   };
+  // only one menu in a group may stay open; opening another closes the rest
+  useEffect(() => {
+    if (!group) return undefined;
+    const name = `glide-select:${group}`;
+    const onOpen = (event: Event) => {
+      if ((event as CustomEvent<string>).detail === id) return;
+      clearTimeout(hoverTimer.current);
+      close('instant');
+    };
+    window.addEventListener(name, onOpen);
+    return () => window.removeEventListener(name, onOpen);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [group, id]);
   const pick = (i: number, viaKey: boolean) => {
     const it = items[i];
     if (!it) {
