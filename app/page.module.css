@@ -92,7 +92,6 @@
   right: auto !important;
   transform-origin: top center;
   transform: translateX(-50%) scale(0.95) !important;
-  border: 1px solid #fff;
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.65);
 }
 
