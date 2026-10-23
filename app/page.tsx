@@ -62,6 +62,13 @@ const secondPage: Person[] = [
     img: "/nift.png",
     instagram: [{ label: "@satchel", href: "https://instagram.com/satchel" }],
   },
+  {
+    name: "8t",
+    handle: "@8t",
+    img: "/8t.png",
+    tiktok: [{ label: "@un", href: "https://tiktok.com/@un" }],
+    discord: "https://discord.com/users/1473451980918620372",
+  },
 ];
 
 function TikTok() {
