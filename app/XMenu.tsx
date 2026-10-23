@@ -20,9 +20,9 @@ export default function XMenu({ options, trigger, ariaLabel }: Props) {
       onChange={(value) => window.open(value, "_blank", "noopener,noreferrer")}
       ariaLabel={ariaLabel}
       showTags={false}
-      size="lg"
-      radius={12}
-      menuWidth={164}
+      size="md"
+      radius={6}
+      menuWidth={112}
       placement="bottom"
       align="left"
       popDuration={180}
@@ -32,6 +32,8 @@ export default function XMenu({ options, trigger, ariaLabel }: Props) {
       surfaceColor="#0b0b0b"
       highlightColor="#1e1e1e"
       textColor="#a3a3a3"
+      optionClassName="cursor-target"
+      optionCursorPadding={2}
     />
   );
 }

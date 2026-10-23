@@ -110,7 +110,17 @@
 }
 
 .xMenu :global(.glide-select__option) {
-  font-size: 0.88rem;
+  padding: 0 8px;
+  font-size: 0.85rem;
+}
+
+.xMenu :global(.glide-select__name) {
+  text-align: center;
+}
+
+/* no selected row, so don't reserve room for the tick */
+.xMenu :global(.glide-select__check) {
+  display: none;
 }
 
 .xMenu :global(.glide-select__option:hover) {

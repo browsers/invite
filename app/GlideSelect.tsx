@@ -38,6 +38,10 @@ export interface GlideSelectProps {
   triggerContent?: ReactNode;
   /** Open the menu when the pointer enters the component. */
   hoverOpen?: boolean;
+  /** Extra class for each option row. */
+  optionClassName?: string;
+  /** data-cursor-padding value for each option row. */
+  optionCursorPadding?: number;
 }
 
 type Phase = 'closed' | 'open' | 'closing';
@@ -87,7 +91,9 @@ const GlideSelect: React.FC<GlideSelectProps> = ({
   ariaLabel = 'Select',
   className = '',
   triggerContent,
-  hoverOpen = false
+  hoverOpen = false,
+  optionClassName = '',
+  optionCursorPadding
 }) => {
   const items = options.map(norm);
   const [inner, setInner] = useState(defaultValue ?? '');
@@ -362,7 +368,8 @@ const GlideSelect: React.FC<GlideSelectProps> = ({
                 role="option"
                 aria-selected={i === selected}
                 data-index={i}
-                className="glide-select__option"
+                data-cursor-padding={optionCursorPadding}
+                className={`glide-select__option${optionClassName ? ` ${optionClassName}` : ''}`}
               >
                 <span className="glide-select__name">{it.label}</span>
                 {showTags && it.tag ? <span className="glide-select__tag">{it.tag}</span> : null}
